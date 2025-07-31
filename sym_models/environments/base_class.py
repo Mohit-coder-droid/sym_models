@@ -2,11 +2,15 @@
 # julia.install()
 
 from julia.api import Julia
-jl = Julia(compiled_modules=False)
+import os 
+project_path = "/Data/sandeep/zMohit/RL Models/SymbolicModelsUtils.jl"
+sysimage_path = os.path.join(project_path, "sys_symbolic.so")
+# Allow compiled modules for fast startup. This is the default.
+jl = Julia()
 
 from julia import Pkg
-Pkg.activate("/content/SymbolicModelsUtils.jl")
-Pkg.instantiate()
+Pkg.activate("/Data/sandeep/zMohit/RL Models/SymbolicModelsUtils.jl")
+# Pkg.instantiate()   # run whenever I update the module not every time 
 
 from julia import SymbolicModelsUtils as smu
 from julia import Main

@@ -1,1 +1,1 @@
-from environments.linear_env import *
+from .environments.linear_env import *
