@@ -370,7 +370,7 @@ class LinearSymbolicEnv(gym.Env):
             truncated = True
             reward += TRUNCATION_REWARD
 
-        return self._get_obs(self.eq), reward, terminated, truncated, {"eq": Main.string(self.eq), "prev_eq":Main.string(prev_eq), "prev_obs":prev_obs}
+        return self._get_obs(self.eq), reward, terminated, truncated, {"eq": Main.string(self.eq), "prev_eq":Main.string(prev_eq), "prev_obs":prev_obs, "terminated":terminated}
 
     def render(self):
         print(f"Current Equation: {Main.string(self.eq)}")
