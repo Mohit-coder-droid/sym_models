@@ -351,6 +351,8 @@ class LinearSymbolicEnv(gym.Env):
          # check if the model takes some absurd action than what should be done
         reward = ABSURD_ACTION_REWARD if Main.string(self.eq)==Main.string(new_eq) else 0
 
+        prev_eq = self.eq
+        prev_obs = self._get_obs(prev_eq)
 
         self.eq = new_eq
 
@@ -361,8 +363,6 @@ class LinearSymbolicEnv(gym.Env):
             else:
                 reward = NOT_COMPLETION_REWARD
 
-
-        # This reward is the main reason for the slow training
         self.total_steps += 1
         reward += self.total_steps * STEP_REWARD
         
@@ -370,7 +370,7 @@ class LinearSymbolicEnv(gym.Env):
             truncated = True
             reward += TRUNCATION_REWARD
 
-        return self._get_obs(self.eq), reward, terminated, truncated, {"eq": Main.string(self.eq)}
+        return self._get_obs(self.eq), reward, terminated, truncated, {"eq": Main.string(self.eq), "prev_eq":Main.string(prev_eq), "prev_obs":prev_obs}
 
     def render(self):
         print(f"Current Equation: {Main.string(self.eq)}")
