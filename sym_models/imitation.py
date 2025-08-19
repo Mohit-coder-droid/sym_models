@@ -183,7 +183,7 @@ class IM(PPO):
             policy_kwargs = policy_kwargs,
             verbose = verbose,
             seed = seed,
-            device = "auto",
+            device = device,
             _init_setup_model = _init_setup_model,
         )
 
