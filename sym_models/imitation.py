@@ -340,3 +340,26 @@ class IM(PPO):
         callback.on_training_end()
 
         return self
+
+    def _excluded_save_params(self) -> list[str]:
+        """
+        Returns the names of the parameters that should be excluded from being
+        saved by pickling. E.g. replay buffers are skipped by default
+        as they take up a lot of space. PyTorch variables should be excluded
+        with this so they can be stored with ``th.save``.
+
+        :return: List of parameters that should be excluded from being saved with pickle.
+        """
+        return [
+            "policy",
+            "device",
+            "env",
+            "replay_buffer",
+            "rollout_buffer",
+            "_vec_normalize_env",
+            "_logger",
+            "_custom_logger",
+            "imitation_callback",
+            "imitation_buffer"
+        ]
+
